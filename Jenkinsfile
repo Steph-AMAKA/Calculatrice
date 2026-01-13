@@ -1,9 +1,9 @@
 pipeline {
-    agent any
-
-    tools {
-        maven 'Maven-3'
-        jdk 'JDK-17'
+    agent {
+        docker {
+            image 'maven:3.9.6-eclipse-temurin-17' // Maven + JDK inclus
+            args '-v /root/.m2:/root/.m2'          // cache Maven pour accélérer les builds
+        }
     }
 
     stages {
