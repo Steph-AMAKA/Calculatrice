@@ -1,17 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.6-eclipse-temurin-17' // Maven + JDK inclus
-            args '-v /root/.m2:/root/.m2'          // cache Maven pour accélérer les builds
-        }
-    }
+    agent any
 
     stages {
-
         stage('Build') {
             steps {
                 echo 'Compilation du projet Calculatrice'
-                sh 'mvn clean compile'
+                sh 'apt-get update && apt-get install -y maven openjdk-17-jdk && mvn clean compile'
             }
         }
 
